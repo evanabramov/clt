@@ -1,13 +1,15 @@
 import java.io.*;
 import java.util.ArrayList;
 
+
+// FileHandler class is a singleton that provides basic read and write methods.
 public class FileHandler {
 
     private static FileHandler instance;
     private BufferedReader reader;
+    private BufferedWriter writer;
+    private ArrayList<String[]> originalList;
     private String PATH;
-    private ArrayList<String[]> list;
-    private int width, height;
 
     private FileHandler() {
         ;
@@ -19,46 +21,55 @@ public class FileHandler {
         return instance;
     }
 
-    public void setPATH (String PATH) {
+    public void setPATH (String PATH) throws FileNotFoundException {
         this.PATH = PATH;
-
-        try {
-            reader = new BufferedReader(new FileReader(PATH));
-        }
-
-        catch(IOException e) {
-            e.printStackTrace();
-        }
+        reader = new BufferedReader(new FileReader(PATH));
     }
 
-    public String getPATH() {
-        return this.PATH;
-    }
 
-    public int getWidth() {
-        return this.width;
-    }
+    //Reads a file by the given earlier PATH
+    public ArrayList<String[]> readFile () throws IOException {
+        originalList = new ArrayList<>();
 
-    public int getHeight() {
-        return this.height;
-    }
-
-    public ArrayList<String[]> readFile () {
-
-        list = new ArrayList<>();
-
-        try {
             while (reader.ready()) {
-                list.add(reader.readLine().split(","));
+                originalList.add(reader.readLine().split(","));
+            }
+
+        return originalList;
+    }
+
+    //Cleans all possible whitespaces in the read strings, requires readFile() prior to this method .
+    public ArrayList<String[]> cleanFile() throws IOException {
+        if(originalList.isEmpty()) {
+            throw new IOException();
+        }
+
+        ArrayList<String[]> cleanList = new ArrayList<>();
+
+        for(int i = 0; i < originalList.size(); i++) {
+            String[] line = originalList.get(i);
+            for(int j = 0; j < line.length; j++) {
+                line[j] = line[j].replaceAll(" ", "");
+            }
+
+            cleanList.add(line);
+        }
+
+        return cleanList;
+    }
+
+    //Writes to a file with a given list
+    public void writeFile(ArrayList<String[]> list, String path) throws IOException {
+        String prompt;
+        writer = new BufferedWriter(new FileWriter(path));
+
+        for(int i = 0; i < list.size(); i++) {
+            for(int j = 0; j < list.get(i).length; j++) {
+                if(j != list.get(i).length - 1)
+                    writer.write(list.get(i)[j] + ",");
+                else
+                    writer.write(list.get(i)[j]);
             }
         }
-        catch(IOException e) {
-            e.printStackTrace();
-        }
-
-        height = list.size();
-        width = list.get(height - 1).length;
-
-        return list;
     }
 }
