@@ -8,7 +8,6 @@ public class FileHandler {
     private static FileHandler instance;
     private BufferedReader reader;
     private BufferedWriter writer;
-    private ArrayList<String[]> originalList;
     private String PATH;
 
     private FileHandler() {
@@ -26,36 +25,29 @@ public class FileHandler {
         reader = new BufferedReader(new FileReader(PATH));
     }
 
-
-    //Reads a file by the given earlier PATH
-    public ArrayList<String[]> readFile () throws IOException {
-        originalList = new ArrayList<>();
-
-            while (reader.ready()) {
-                originalList.add(reader.readLine().split(","));
-            }
-
-        return originalList;
+    public String getPATH() {
+        return this.PATH;
     }
 
-    //Cleans all possible whitespaces in the read strings, requires readFile() prior to this method .
-    public ArrayList<String[]> cleanFile() throws IOException {
-        if(originalList.isEmpty()) {
-            throw new IOException();
-        }
 
-        ArrayList<String[]> cleanList = new ArrayList<>();
+    //Reads a file by the given earlier PATH. Beware - it removes all the whitespaces in cells!
+    public ArrayList<String[]> readFile () throws IOException {
+        ArrayList<String[]>list = new ArrayList<>();
 
-        for(int i = 0; i < originalList.size(); i++) {
-            String[] line = originalList.get(i);
+            while (reader.ready()) {
+                list.add(reader.readLine().split(","));
+            }
+
+        for(int i = 0; i < list.size(); i++) {
+            String[] line = list.get(i);
             for(int j = 0; j < line.length; j++) {
                 line[j] = line[j].replaceAll(" ", "");
             }
 
-            cleanList.add(line);
+            list.set(i, line);
         }
 
-        return cleanList;
+        return list;
     }
 
     //Writes to a file with a given list
