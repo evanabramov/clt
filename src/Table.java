@@ -42,7 +42,7 @@ public class Table {
     public ArrayList<String[]> getTable() {
         ArrayList<String[]> table = new ArrayList<>();
 
-        if(this.header != null || this.header.length != 0) {
+        if(this.header != null) {
             table.add(this.header);
         }
 
