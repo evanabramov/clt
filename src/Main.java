@@ -1,12 +1,14 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        FileHandler fileHandler = FileHandler.getInstance();
-        fileHandler.setPATH("/home/kawa1sou/Workspace/qwe.txt");
+        Initializer initializer = Initializer.getInstance();
+        Table table = initializer.initializeTheTable("K:\\SampleCSVFile_119kb.csv", "y");
+        Visualizer.printCSV(table);
+        Visualizer.printTable(table);
 
-           Visualizer visualizer = new Visualizer();
-            fileHandler.readFile();
-        visualizer.printTable();
     }
 }
