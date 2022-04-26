@@ -49,4 +49,8 @@ public class Visualizer {
             System.out.println();
         }
     }
+
+    public static void printAColumn(Table table) {
+
+    }
 }
