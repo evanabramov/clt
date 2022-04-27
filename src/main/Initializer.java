@@ -1,7 +1,10 @@
+package main;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//Initializer class is a singleton which purpose is to initialize the table by the path.
 public class Initializer {
 
     private static Initializer instance;

@@ -1,6 +1,7 @@
+package main;
+
 import java.io.*;
 import java.util.ArrayList;
-
 
 // FileHandler class is a singleton that provides basic read and write methods.
 public class FileHandler {

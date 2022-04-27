@@ -1,3 +1,5 @@
+package main;
+
 import java.util.ArrayList;
 
 // Class that takes care of viewing read file.
@@ -50,7 +52,15 @@ public class Visualizer {
         }
     }
 
-    public static void printAColumn(Table table) {
+    public static void printAColumn(Table table, int column) throws IndexOutOfBoundsException {
+        if(column < 0 || column > table.getHeader().length)
+            throw new IndexOutOfBoundsException();
+        for(String[] row : table.getTable()) {
+            System.out.println(row[column]);
+        }
+    }
 
+    public static void statistics(Table table) {
+        
     }
 }
