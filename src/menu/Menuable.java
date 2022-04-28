@@ -10,11 +10,6 @@ public interface Menuable {
 
     void logic();
 
-    default void pass(Menuable menuableEntity) {
-        menuableEntity.show();
-        menuableEntity.logic();
-    }
-
     default int input() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {

@@ -21,7 +21,6 @@ public class ViewingMenu implements Menuable {
         System.out.println("3. View specific columns");
         System.out.println("4. View the statistics");
         System.out.println("5. Back");
-        System.out.println();
     }
 
     @Override
@@ -36,8 +35,9 @@ public class ViewingMenu implements Menuable {
             case 4:
                 break;
             case 5:
-                pass(MainMenu.getInstance());
+                return;
             case -1:
+                System.out.println("There's a problem with your input");
                 return;
             default:
                 System.out.println("There's no such an option");

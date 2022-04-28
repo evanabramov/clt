@@ -23,7 +23,11 @@ public class MainMenu implements Menuable {
         System.out.println("2. Editing");
         System.out.println("3. Load a file");
         System.out.println("4. Quit");
-        System.out.println();
+    }
+
+    public void pass(Menuable menuableEntity) {
+        menuableEntity.show();
+        menuableEntity.logic();
     }
 
     @Override
@@ -46,6 +50,7 @@ public class MainMenu implements Menuable {
                 System.exit(0);
                 break;
             case -1:
+                System.out.println("There's a problem with your input");
                 return;
             default:
                 System.out.println("There's no such an option");

@@ -17,7 +17,6 @@ public class EditingMenu implements Menuable {
     public void show() {
         System.out.println("1. Edit a specific cell");
         System.out.println("2. Back");
-        System.out.println();
     }
 
     @Override
@@ -28,6 +27,7 @@ public class EditingMenu implements Menuable {
             case 2:
                 return;
             case -1:
+                System.out.println("There's a problem with your input");
                 return;
             default:
                 System.out.println("There's no such an option");
