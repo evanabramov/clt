@@ -1,15 +1,26 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.MissingFormatArgumentException;
 
 // Class that takes care of viewing read file.
 public class Visualizer {
+
+    public static Visualizer instance;
 
     private Visualizer() {
         ;
     }
 
-    public static void printCSV(Table table) {
+    public static Visualizer getInstance() {
+        if(instance == null)
+            instance = new Visualizer();
+        return instance;
+    }
+
+    public void printCSV(Table table) {
+        System.out.println();
+
         ArrayList<String[]> data = table.getTable();
 
         for(int i = 0; i < data.size(); i++) {
@@ -22,45 +33,86 @@ public class Visualizer {
 
             System.out.println();
         }
+
+        System.out.println();
     }
 
-    //Gonna be done properly later.
-    public static void printTable(Table table) {
-        if(table.getHeader() != null) {
-            String[] header = table.getHeader();
+    //Prints the table;
+    public void printTable(Table table) {
+        System.out.println();
 
-            for(int i = 0; i < header.length; i++) {
-                System.out.format("%-15s", header[i]);
-            }
+        String leftAlignFormat = leftAlignFormat(table);
 
-            System.out.println();
+        int header = 0;
+        if(table.getHeader() != null)
+            header = 1;
 
-            for(int i = 0; i < header.length; i++) {
-                System.out.print("---------------");
-            }
-
-            System.out.println();
-        }
-
-        ArrayList<String[]> data = table.getTableValues();
-
-        for(int i = 0; i < data.size(); i++) {
-            for(int j = 0; j < data.get(i).length; j++) {
-                    System.out.format("%-15s", data.get(i)[j]);
-            }
-            System.out.println();
-        }
-    }
-
-    public static void printAColumn(Table table, int column) throws IndexOutOfBoundsException {
-        if(column < 0 || column > table.getHeader().length)
-            throw new IndexOutOfBoundsException();
         for(String[] row : table.getTable()) {
-            System.out.println(row[column]);
+            try {
+                System.out.format(leftAlignFormat, row);
+                if(header == 1) {
+                    System.out.println(bottomLine(row.toString().length()));
+                    header = 0;
+                }
+            }
+
+            catch (MissingFormatArgumentException e) {
+                System.out.println("\n");
+            }
         }
+        System.out.println();
     }
 
-    public static void statistics(Table table) {
+    public void statistics(Table table) {
         
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //Counting row widths
+    private int width(Table table) {
+        int width = 0;
+        ArrayList<String[]> tableAsList = table.getTable();
+        for(String[] row : tableAsList) {
+            if(width < row.length)
+                width = row.length;
+        }
+
+        return width;
+    }
+
+    //Counting maximum cell length in a column
+    private int[] columnsWidth(Table table) {
+        int[] columns = new int[width(table)];
+        ArrayList<String[]> tableAsList = table.getTable();
+        for(int i = 0; i < tableAsList.size(); i++) {
+            for(int j = 0; j < tableAsList.get(i).length; j++) {
+                if(columns[j] == 0 || columns[j] < tableAsList.get(i)[j].length()) {
+                    columns[j] = tableAsList.get(i)[j].length();
+                }
+            }
+        }
+        return columns;
+    }
+
+    //Assembling a string for formatting
+    private String leftAlignFormat(Table table) {
+        int[] widths = columnsWidth(table);
+        String leftAlignFormat = "|%-";
+        for(int width : widths) {
+            int temp = width + 1;
+            leftAlignFormat += temp;
+            if(width != widths[widths.length - 1])
+                leftAlignFormat += "s|%-";
+        }
+
+        leftAlignFormat += "s |%n";
+        return leftAlignFormat;
+    }
+
+    //Assembling a header-values divider
+    private String bottomLine(int length) {
+        return "+" + "-".repeat(length) + "+";
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 }

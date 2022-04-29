@@ -21,20 +21,21 @@ public class ViewingMenu implements Menuable {
 
     @Override
     public void show() {
-        System.out.println("1. View the file as a table");
-        System.out.println("2. View the file as an csv");
-        System.out.println("3. View specific columns");
+        System.out.println("1. View the table");
+        System.out.println("2. View the original file");
         System.out.println("4. View the statistics");
         System.out.println("5. Back");
     }
 
     @Override
     public void logic() {
+        Visualizer visualizer = Visualizer.getInstance();
         switch (this.input()) {
             case 1:
-                Visualizer.printTable(FileHandler.getInstance().getTable());
+                visualizer.printTable(FileHandler.getInstance().getTable());
                 break;
             case 2:
+                visualizer.printCSV(FileHandler.getInstance().getTable());
                 break;
             case 3:
                 break;

@@ -23,10 +23,9 @@ public class MainMenu implements Menuable {
         System.out.println("2. Editing");
         System.out.println("3. Load a file");
         System.out.println("4. Quit");
-
     }
 
-    public void pass(Menuable menuableEntity) {
+    private void pass(Menuable menuableEntity) {
         menuableEntity.show();
         menuableEntity.logic();
     }
