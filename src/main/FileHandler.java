@@ -10,6 +10,7 @@ public class FileHandler {
     private BufferedReader reader;
     private BufferedWriter writer;
     private String PATH;
+    private Table table;
 
     private FileHandler() {
         ;
@@ -22,12 +23,21 @@ public class FileHandler {
     }
 
     public void setPATH (String PATH) throws FileNotFoundException {
+        if(PATH != null)
+            reader = new BufferedReader(new FileReader(PATH));
         this.PATH = PATH;
-        reader = new BufferedReader(new FileReader(PATH));
     }
 
     public String getPATH() {
         return this.PATH;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public Table getTable() {
+        return table;
     }
 
 
@@ -53,9 +63,9 @@ public class FileHandler {
     }
 
     //Writes to a file with a given list
-    public void writeFile(ArrayList<String[]> list, String path) throws IOException {
+    public void writeFile(ArrayList<String[]> list, String PATH) throws IOException {
         String prompt;
-        writer = new BufferedWriter(new FileWriter(path));
+        writer = new BufferedWriter(new FileWriter(PATH));
 
         for(int i = 0; i < list.size(); i++) {
             for(int j = 0; j < list.get(i).length; j++) {

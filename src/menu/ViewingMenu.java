@@ -1,5 +1,10 @@
 package menu;
 
+import main.FileHandler;
+import main.Visualizer;
+
+import java.io.File;
+
 public class ViewingMenu implements Menuable {
 
     private static ViewingMenu instance;
@@ -27,6 +32,7 @@ public class ViewingMenu implements Menuable {
     public void logic() {
         switch (this.input()) {
             case 1:
+                Visualizer.printTable(FileHandler.getInstance().getTable());
                 break;
             case 2:
                 break;
