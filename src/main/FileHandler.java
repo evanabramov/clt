@@ -41,24 +41,14 @@ public class FileHandler {
     }
 
 
-    //Reads a file by the given earlier PATH. Beware - it removes all the whitespaces in cells!
+    //Reads a file by the given earlier PATH.
+    //Beware - it removes all the whitespaces in cells, so it can be parsed into a table object!
     public ArrayList<String[]> readFile() throws IOException {
         ArrayList<String[]> list = new ArrayList<>();
 
             while (reader.ready()) {
                 list.add(reader.readLine().split(","));
             }
-        /*
-        for(int i = 0; i < list.size(); i++) {
-            String[] line = list.get(i);
-            for(int j = 0; j < line.length; j++) {
-                line[j] = line[j].replaceAll(" ", "");
-            }
-
-            list.set(i, line);
-        }
-         */
-
         return list;
     }
 

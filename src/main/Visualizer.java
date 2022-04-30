@@ -44,29 +44,22 @@ public class Visualizer {
         String leftAlignFormat = leftAlignFormat(table);
 
         int header = 0;
-        if(table.getHeader() != null)
+        if (table.getHeader() != null)
             header = 1;
 
-        for(String[] row : table.getTable()) {
+        for (String[] row : table.getTable()) {
             try {
                 System.out.format(leftAlignFormat, row);
-                if(header == 1) {
+                if (header == 1) {
                     System.out.println(bottomLine(row.toString().length()));
                     header = 0;
                 }
-            }
-
-            catch (MissingFormatArgumentException e) {
+            } catch (MissingFormatArgumentException e) {
                 System.out.println("\n");
             }
         }
         System.out.println();
     }
-
-    public void statistics(Table table) {
-        
-    }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //Counting row widths

@@ -1,5 +1,13 @@
 package menu;
 
+import main.FileHandler;
+import main.Table;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 public class EditingMenu implements Menuable {
 
     private static EditingMenu instance;
@@ -15,7 +23,7 @@ public class EditingMenu implements Menuable {
     }
     @Override
     public void show() {
-        System.out.println("1. Edit a specific cell");
+        System.out.println("1. Edit a cell");
         System.out.println("2. Back");
     }
 
@@ -23,6 +31,7 @@ public class EditingMenu implements Menuable {
     public void logic() {
         switch (this.input()) {
             case 1:
+                edit(FileHandler.getInstance().getTable());
                 break;
             case 2:
                 return;
@@ -34,4 +43,52 @@ public class EditingMenu implements Menuable {
                 return;
         }
     }
+
+    private void edit(Table table) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("What cell to change? (row, column):");
+        try {
+            String[] input = reader.readLine().split(", ");
+            int[] integerInput = {Integer.parseInt(input[0]) - 1, Integer.parseInt(input[1]) - 1};
+
+            System.out.println("New value: ");
+            String value = reader.readLine();
+
+            if(integerInput[0] == 0 && table.getHeader() != null) {
+                String[] header = table.getHeader();
+                header[integerInput[1]] = value;
+                table.setHeader(header);
+            }
+
+            else if(integerInput[0] != 0 && table.getHeader() != null) {
+                ArrayList<String[]> valuesAsList = table.getTableValues();
+                String[] row = valuesAsList.get(integerInput[0] - 1);
+                row[integerInput[1]] = value;
+                valuesAsList.set(integerInput[0] - 1, row);
+                table.setTableValues(valuesAsList);
+            }
+
+            else if(table.getHeader() == null) {
+                ArrayList<String[]> valuesAsList = table.getTableValues();
+                String[] row = valuesAsList.get(integerInput[0]);
+                row[integerInput[1]] = value;
+                valuesAsList.set(integerInput[0], row);
+                table.setTableValues(valuesAsList);
+            }
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("Index out of bounds!");
+            return;
+        }
+        catch (IOException e) {
+            System.out.println("There was a problem with your input(IOException)");
+            return;
+        }
+
+        catch (NumberFormatException e) {
+            System.out.println("NumberFormatException!");
+            return;
+        }
+    }
+
 }

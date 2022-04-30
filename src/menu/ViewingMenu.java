@@ -23,8 +23,7 @@ public class ViewingMenu implements Menuable {
     public void show() {
         System.out.println("1. View the table");
         System.out.println("2. View the original file");
-        System.out.println("4. View the statistics");
-        System.out.println("5. Back");
+        System.out.println("3. Back");
     }
 
     @Override
@@ -38,10 +37,6 @@ public class ViewingMenu implements Menuable {
                 visualizer.printCSV(FileHandler.getInstance().getTable());
                 break;
             case 3:
-                break;
-            case 4:
-                break;
-            case 5:
                 return;
             case -1:
                 System.out.println("There's a problem with your input");
