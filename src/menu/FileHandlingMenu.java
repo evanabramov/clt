@@ -7,25 +7,27 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-public class FileLoadingMenu implements Menuable {
+public class FileHandlingMenu implements Menuable {
 
-    private static FileLoadingMenu instance;
+    private static FileHandlingMenu instance;
 
-    private FileLoadingMenu() {
+    private FileHandlingMenu() {
         ;
     }
 
-    public static FileLoadingMenu getInstance() {
+    public static FileHandlingMenu getInstance() {
         if(instance == null)
-            instance = new FileLoadingMenu();
+            instance = new FileHandlingMenu();
         return instance;
     }
 
     @Override
     public void show() {
-        System.out.println("1. Proceed");
-        System.out.println("2. Back");
+        System.out.println("1. Load a file");
+        System.out.println("2. Write to a file");
+        System.out.println("3. Back");
     }
 
     @Override
@@ -35,6 +37,9 @@ public class FileLoadingMenu implements Menuable {
                 load();
                 break;
             case 2:
+                write();
+                break;
+            case 3:
                 return;
             case -1:
                 System.out.println("There's no such an option!");
@@ -76,5 +81,30 @@ public class FileLoadingMenu implements Menuable {
         }
     }
 
+    private void write() {
+        FileHandler fileHandler = FileHandler.getInstance();
+        Table table = fileHandler.getTable();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<String[]> tableAsList = new ArrayList<>();
 
+        try {
+            if(table.getHeader() != null)
+                tableAsList.add(table.getHeader());
+            tableAsList.addAll(table.getTableValues());
+
+            System.out.println("Filepath: ");
+            String PATH = reader.readLine();
+            fileHandler.writeFile(tableAsList, PATH);
+        }
+
+        catch (IOException e) {
+            System.out.println("There was a problem writing to a file(IOException)");
+            return;
+        }
+
+        catch (NullPointerException e) {
+            System.out.println("There's nothing to write!");
+            return;
+        }
+    }
 }

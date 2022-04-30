@@ -8,7 +8,6 @@ public class FileHandler {
 
     private static FileHandler instance;
     private BufferedReader reader;
-    private BufferedWriter writer;
     private String PATH;
     private Table table;
 
@@ -54,15 +53,16 @@ public class FileHandler {
 
     //Writes to a file with a given list
     public void writeFile(ArrayList<String[]> list, String PATH) throws IOException {
-        String prompt;
-        writer = new BufferedWriter(new FileWriter(PATH));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(PATH));
 
-        for(int i = 0; i < list.size(); i++) {
-            for(int j = 0; j < list.get(i).length; j++) {
-                if(j != list.get(i).length - 1)
-                    writer.write(list.get(i)[j] + ",");
-                else
-                    writer.write(list.get(i)[j]);
+        try(writer) {
+            for (int i = 0; i < list.size(); i++) {
+                for (int j = 0; j < list.get(i).length; j++) {
+                    if (j != list.get(i).length - 1)
+                        writer.write(list.get(i)[j] + ",");
+                    else
+                        writer.write(list.get(i)[j] + "\n");
+                }
             }
         }
     }

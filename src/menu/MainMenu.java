@@ -21,7 +21,7 @@ public class MainMenu implements Menuable {
 
         System.out.println("1. Viewing");
         System.out.println("2. Editing");
-        System.out.println("3. Load a file");
+        System.out.println("3. File handling");
         System.out.println("4. Quit");
     }
 
@@ -41,7 +41,7 @@ public class MainMenu implements Menuable {
                 pass(EditingMenu.getInstance());
                 break;
             case 3:
-                pass(FileLoadingMenu.getInstance());
+                pass(FileHandlingMenu.getInstance());
                 break;
             case 4:
                 for(StackTraceElement e : Thread.currentThread().getStackTrace()) {
