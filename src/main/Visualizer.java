@@ -3,7 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.MissingFormatArgumentException;
 
-// visualization class.
+// Class that takes care of viewing read file.
 public class Visualizer {
 
     public static Visualizer instance;
@@ -18,7 +18,6 @@ public class Visualizer {
         return instance;
     }
 
-    // prints table as csv file, might not be the same as it was initially file-wise
     public void printCSV(Table table) {
         System.out.println();
 
@@ -38,7 +37,7 @@ public class Visualizer {
         System.out.println("\n");
     }
 
-    // prints the table
+    //Prints the table;
     public void printTable(Table table) {
         System.out.println();
 
@@ -63,11 +62,10 @@ public class Visualizer {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // row widths
+    //Counting row widths
     private int width(Table table) {
         int width = 0;
         ArrayList<String[]> tableAsList = table.getTable();
-
         for(String[] row : tableAsList) {
             if(width < row.length)
                 width = row.length;
@@ -76,11 +74,10 @@ public class Visualizer {
         return width;
     }
 
-    // maximum cell length in a column
+    //Counting maximum cell length in a column
     private int[] columnsWidth(Table table) {
         int[] columns = new int[width(table)];
         ArrayList<String[]> tableAsList = table.getTable();
-
         for(int i = 0; i < tableAsList.size(); i++) {
             for(int j = 0; j < tableAsList.get(i).length; j++) {
                 if(columns[j] == 0 || columns[j] < tableAsList.get(i)[j].length()) {
@@ -91,11 +88,10 @@ public class Visualizer {
         return columns;
     }
 
-    // assembles a string for formatting
+    //Assembling a string for formatting
     private String leftAlignFormat(Table table) {
         int[] widths = columnsWidth(table);
         String leftAlignFormat = "|%-";
-
         for(int width : widths) {
             int temp = width + 1;
             leftAlignFormat += temp;
@@ -107,8 +103,9 @@ public class Visualizer {
         return leftAlignFormat;
     }
 
-    // assembles a header-values divider
+    //Assembling a header-values divider
     private String bottomLine(int length) {
         return "+" + "-".repeat(length) + "+";
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 }

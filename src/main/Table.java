@@ -3,7 +3,7 @@ package main;
 import java.io.IOException;
 import java.util.ArrayList;
 
-// class that describes table entity; table object essentially is the header and the values
+//Class that describes table entity. Table object essentially is the header and the values
 public class Table {
     private ArrayList<String[]> tableValues;
     private String[] header;
@@ -40,7 +40,7 @@ public class Table {
         this.header = header;
     }
 
-    // returns representation of the table as arrayList;
+    //Method that returns representation of the table as a single arrayList;
     public ArrayList<String[]> getTable() {
         ArrayList<String[]> table = new ArrayList<>();
 

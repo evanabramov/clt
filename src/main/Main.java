@@ -3,16 +3,15 @@ package main;
 import menu.MainMenu;
 import menu.MenuController;
 
-/* TODO:
-1. close readers in filehandler DONE
-2. comments DONE
-3. different regex or clean just read file
-4. solve bottomline issue
-5. setup gradle, make another branch probably
-*/
-
 public class Main {
     public static void main(String[] args) {
+
+        // Input's bufferedreader bothers cause I cannot close or implement try-with
+        //Initializer initializer = Initializer.getInstance();
+        //Table table = initializer.initializeTheTable("data/a.csv", "y");
+        //Visualizer.printCSV(table);
+        //Visualizer.printTable(table);
+        //Visualizer.printAColumn(table, 1);
         MenuController.loop();
     }
 }
