@@ -66,9 +66,7 @@ public class FileHandlingMenu implements Menuable {
                 throw new IOException();
             }
 
-            fileHandler.setPATH(PATH);
-
-            fileHandler.setTable(new Table(fileHandler.readFile(), header));
+            fileHandler.setTable(new Table(fileHandler.readFile(PATH), header));
         }
 
         catch(FileNotFoundException e) {
@@ -83,20 +81,13 @@ public class FileHandlingMenu implements Menuable {
     }
 
     private void write() {
-        FileHandler fileHandler = FileHandler.getInstance();
-        Table table = fileHandler.getTable();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<String[]> tableAsList = new ArrayList<>();
 
         try {
-            if(table.getHeader() != null)
-                tableAsList.add(table.getHeader());
-            tableAsList.addAll(table.getTableValues());
-
             System.out.println("Filepath: ");
             String PATH = reader.readLine();
             System.out.println();
-            fileHandler.writeFile(tableAsList, PATH);
+            FileHandler.getInstance().writeFile(FileHandler.getInstance().getTable(), PATH);
         }
 
         catch (IOException e) {

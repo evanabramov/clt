@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public class FileHandler {
 
     private static FileHandler instance;
-    private BufferedReader reader;
-    private String PATH;
     private Table table;
+
+    private String PATH;
 
     private FileHandler() {
         ;
@@ -21,16 +21,6 @@ public class FileHandler {
         return instance;
     }
 
-    public void setPATH (String PATH) throws FileNotFoundException {
-        if(PATH != null)
-            reader = new BufferedReader(new FileReader(PATH));
-        this.PATH = PATH;
-    }
-
-    public String getPATH() {
-        return this.PATH;
-    }
-
     public void setTable(Table table) {
         this.table = table;
     }
@@ -39,29 +29,37 @@ public class FileHandler {
         return table;
     }
 
-
+    public String getPATH() {
+        return this.PATH;
+    }
     //Reads a file by the given earlier PATH.
     //Beware - it removes all the whitespaces in cells, so it can be parsed into a table object!
-    public ArrayList<String[]> readFile() throws IOException {
+    public ArrayList<String[]> readFile(String PATH) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(PATH));
         ArrayList<String[]> list = new ArrayList<>();
+        this.PATH = PATH;
 
+        try(reader) {
             while (reader.ready()) {
                 list.add(reader.readLine().split(","));
             }
+        }
+
         return list;
     }
 
     //Writes to a file with a given list
-    public void writeFile(ArrayList<String[]> list, String PATH) throws IOException {
+    public void writeFile(Table table, String PATH) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(PATH));
+        ArrayList<String[]> tableAsList = table.getTable();
 
         try(writer) {
-            for (int i = 0; i < list.size(); i++) {
-                for (int j = 0; j < list.get(i).length; j++) {
-                    if (j != list.get(i).length - 1)
-                        writer.write(list.get(i)[j] + ",");
+            for (int i = 0; i < tableAsList.size(); i++) {
+                for (int j = 0; j < tableAsList.get(i).length; j++) {
+                    if (j != tableAsList.get(i).length - 1)
+                        writer.write(tableAsList.get(i)[j] + ",");
                     else
-                        writer.write(list.get(i)[j] + "\n");
+                        writer.write(tableAsList.get(i)[j] + "\n");
                 }
             }
         }
