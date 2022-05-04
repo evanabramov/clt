@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+// menu for editing options
 public class EditingMenu implements Menuable {
 
     private static EditingMenu instance;
@@ -44,6 +45,7 @@ public class EditingMenu implements Menuable {
         }
     }
 
+    // edits a chosen cell
     private void edit(Table table) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("What cell to change? (row, column):");

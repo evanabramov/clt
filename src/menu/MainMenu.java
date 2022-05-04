@@ -1,5 +1,6 @@
 package menu;
 import main.*;
+// main menu
 public class MainMenu implements Menuable {
 
     private static MainMenu instance;
@@ -25,6 +26,7 @@ public class MainMenu implements Menuable {
         System.out.println("4. Quit");
     }
 
+    // calls another menuable object
     private void pass(Menuable menuableEntity) {
         menuableEntity.show();
         menuableEntity.logic();
@@ -37,12 +39,12 @@ public class MainMenu implements Menuable {
         switch (this.input()) {
             case 1:
                 if (FileHandler.getInstance().getTable() == null)
-                    throw new NoTableException();
+                    throw new NoTableLoadedException();
                 pass(ViewingMenu.getInstance());
                 break;
             case 2:
                 if (FileHandler.getInstance().getTable() == null)
-                    throw new NoTableException();
+                    throw new NoTableLoadedException();
                 pass(EditingMenu.getInstance());
                 break;
             case 3:
@@ -60,7 +62,7 @@ public class MainMenu implements Menuable {
             }
         }
 
-        catch (NoTableException e) {
+        catch (NoTableLoadedException e) {
             System.out.println(e.getMessage() + "\n");
         }
     }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+// menu entity blueprint; menus are singletons implementing menuable interface
 public interface Menuable {
 
     void show();
@@ -12,6 +13,7 @@ public interface Menuable {
 
     default int input() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
         try {
             int input = Integer.parseInt(reader.readLine());
             System.out.println();

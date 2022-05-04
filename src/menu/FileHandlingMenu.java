@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+// menu for handling files
 public class FileHandlingMenu implements Menuable {
 
     private static FileHandlingMenu instance;
@@ -50,6 +51,7 @@ public class FileHandlingMenu implements Menuable {
         }
     }
 
+    // loads and assigns files to filehandler's inner table variable
     private void load() {
         FileHandler fileHandler = FileHandler.getInstance();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -80,6 +82,7 @@ public class FileHandlingMenu implements Menuable {
         }
     }
 
+    // writes filehandler's inner table to a file
     private void write() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 

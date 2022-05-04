@@ -5,6 +5,7 @@ import main.Visualizer;
 
 import java.io.File;
 
+// menu for viewing options
 public class ViewingMenu implements Menuable {
 
     private static ViewingMenu instance;
