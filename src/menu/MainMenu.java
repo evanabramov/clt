@@ -33,28 +33,35 @@ public class MainMenu implements Menuable {
     @Override
     public void logic() {
 
+        try {
         switch (this.input()) {
             case 1:
+                if (FileHandler.getInstance().getTable() == null)
+                    throw new NoTableException();
                 pass(ViewingMenu.getInstance());
                 break;
             case 2:
+                if (FileHandler.getInstance().getTable() == null)
+                    throw new NoTableException();
                 pass(EditingMenu.getInstance());
                 break;
             case 3:
                 pass(FileHandlingMenu.getInstance());
                 break;
             case 4:
-                for(StackTraceElement e : Thread.currentThread().getStackTrace()) {
-                    System.out.println(e.toString());
-                }
                 System.exit(0);
                 break;
             case -1:
-                System.out.println("There's a problem with your input");
+                System.out.println("There's a problem with your input\n");
                 return;
             default:
-                System.out.println("There's no such an option");
+                System.out.println("There's no such an option\n");
                 return;
+            }
+        }
+
+        catch (NoTableException e) {
+            System.out.println(e.getMessage() + "\n");
         }
     }
 }

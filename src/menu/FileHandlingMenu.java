@@ -42,10 +42,10 @@ public class FileHandlingMenu implements Menuable {
             case 3:
                 return;
             case -1:
-                System.out.println("There's no such an option!");
+                System.out.println("There's no such an option!\n");
                 return;
             default:
-                System.out.println("There's a problem with your input");
+                System.out.println("There's a problem with your input\n");
                 return;
         }
     }
@@ -60,6 +60,7 @@ public class FileHandlingMenu implements Menuable {
             PATH = reader.readLine();
             System.out.println("Is there a header?(y/n)");
             header = reader.readLine();
+            System.out.println();
 
             if(!(header.equals("y") || header.equals("n"))) {
                 throw new IOException();
@@ -71,12 +72,12 @@ public class FileHandlingMenu implements Menuable {
         }
 
         catch(FileNotFoundException e) {
-            System.out.println("File was not found!");
+            System.out.println("File was not found!\n");
             return;
         }
 
         catch(IOException e) {
-            System.out.println("There was a problem (IOException)");
+            System.out.println("There was a problem (IOException)\n");
             return;
         }
     }
@@ -94,16 +95,17 @@ public class FileHandlingMenu implements Menuable {
 
             System.out.println("Filepath: ");
             String PATH = reader.readLine();
+            System.out.println();
             fileHandler.writeFile(tableAsList, PATH);
         }
 
         catch (IOException e) {
-            System.out.println("There was a problem writing to a file(IOException)");
+            System.out.println("There was a problem writing to a file(IOException)\n");
             return;
         }
 
         catch (NullPointerException e) {
-            System.out.println("There's nothing to write!");
+            System.out.println("There's nothing to write!\n");
             return;
         }
     }

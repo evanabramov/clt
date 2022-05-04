@@ -36,10 +36,10 @@ public class EditingMenu implements Menuable {
             case 2:
                 return;
             case -1:
-                System.out.println("There's a problem with your input");
+                System.out.println("There's a problem with your input\n");
                 return;
             default:
-                System.out.println("There's no such an option");
+                System.out.println("There's no such an option\n");
                 return;
         }
     }
@@ -53,6 +53,7 @@ public class EditingMenu implements Menuable {
 
             System.out.println("New value: ");
             String value = reader.readLine();
+            System.out.println();
 
             if(integerInput[0] == 0 && table.getHeader() != null) {
                 String[] header = table.getHeader();
@@ -77,16 +78,16 @@ public class EditingMenu implements Menuable {
             }
         }
         catch (IndexOutOfBoundsException e) {
-            System.out.println("Index out of bounds!");
+            System.out.println("Index out of bounds!\n");
             return;
         }
         catch (IOException e) {
-            System.out.println("There was a problem with your input(IOException)");
+            System.out.println("There was a problem with your input(IOException)\n");
             return;
         }
 
         catch (NumberFormatException e) {
-            System.out.println("NumberFormatException!");
+            System.out.println("NumberFormatException!\n");
             return;
         }
     }

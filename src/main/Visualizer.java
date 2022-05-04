@@ -34,7 +34,7 @@ public class Visualizer {
             System.out.println();
         }
 
-        System.out.println();
+        System.out.println("\n");
     }
 
     //Prints the table;
@@ -55,10 +55,10 @@ public class Visualizer {
                     header = 0;
                 }
             } catch (MissingFormatArgumentException e) {
-                System.out.println("\n");
+                System.out.println();
             }
         }
-        System.out.println();
+        System.out.println("\n");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

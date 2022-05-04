@@ -13,16 +13,18 @@ public interface Menuable {
     default int input() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            return Integer.parseInt(reader.readLine());
+            int input = Integer.parseInt(reader.readLine());
+            System.out.println();
+            return input;
         }
 
         catch(NumberFormatException e) {
-            System.out.println("String can't be parsed to int");
+            System.out.println("String can't be parsed to int\n");
         }
 
         catch(IOException e) {
             e.printStackTrace();
-            System.out.println("There was a problem with your input");
+            System.out.println("There was a problem with your input\n");
         }
 
         return -1;

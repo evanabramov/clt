@@ -39,10 +39,10 @@ public class ViewingMenu implements Menuable {
             case 3:
                 return;
             case -1:
-                System.out.println("There's a problem with your input");
+                System.out.println("There's a problem with your input\n");
                 return;
             default:
-                System.out.println("There's no such an option");
+                System.out.println("There's no such an option\n");
                 return;
         }
     }
