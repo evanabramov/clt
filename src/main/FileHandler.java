@@ -3,12 +3,11 @@ package main;
 import java.io.*;
 import java.util.ArrayList;
 
-// FileHandler class is a singleton that provides basic read and write methods.
+// singleton that provides basic read and write methods.
 public class FileHandler {
 
     private static FileHandler instance;
     private Table table;
-
     private String PATH;
 
     private FileHandler() {
@@ -32,8 +31,8 @@ public class FileHandler {
     public String getPATH() {
         return this.PATH;
     }
-    //Reads a file by the given earlier PATH.
-    //Beware - it removes all the whitespaces in cells, so it can be parsed into a table object!
+
+    // reads a file by the given path; removes all whitespaces in cells, so it can be parsed into a table object
     public ArrayList<String[]> readFile(String PATH) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(PATH));
         ArrayList<String[]> list = new ArrayList<>();
@@ -48,7 +47,7 @@ public class FileHandler {
         return list;
     }
 
-    //Writes to a file with a given list
+    // writes a file with the given table
     public void writeFile(Table table, String PATH) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(PATH));
         ArrayList<String[]> tableAsList = table.getTable();
