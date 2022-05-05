@@ -32,15 +32,19 @@ public class FileHandler {
         return this.PATH;
     }
 
-    // reads a file by the given path; removes all whitespaces in cells, so it can be parsed into a table object
-    public ArrayList<String[]> readFile(String PATH) throws IOException {
+    // reads a file by the given path
+    public ArrayList<String[]> readFile(String PATH, String regex) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(PATH));
         ArrayList<String[]> list = new ArrayList<>();
         this.PATH = PATH;
 
+        String thisRegex = ",";
+        if(!regex.equals(""))
+            thisRegex = regex;
+
         try(reader) {
             while (reader.ready()) {
-                list.add(reader.readLine().split(","));
+                list.add(reader.readLine().split(thisRegex));
             }
         }
 

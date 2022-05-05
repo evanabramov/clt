@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 // menu for handling files
 public class FileHandlingMenu implements Menuable {
@@ -55,20 +57,31 @@ public class FileHandlingMenu implements Menuable {
     private void load() {
         FileHandler fileHandler = FileHandler.getInstance();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String PATH, header;
+        String PATH, header, regex;
 
         try {
             System.out.println("Filepath: ");
             PATH = reader.readLine();
             System.out.println("Is there a header?(y/n)");
             header = reader.readLine();
-            System.out.println();
+            System.out.println("Separator: (default:(,))");
+            regex = reader.readLine();
 
             if(!(header.equals("y") || header.equals("n"))) {
                 throw new IOException();
             }
 
-            fileHandler.setTable(new Table(fileHandler.readFile(PATH), header));
+            // check if regex is valid
+            try {
+                Pattern.compile(regex);
+            }
+
+            catch (PatternSyntaxException e) {
+                System.out.println("Invalid separator");
+                return;
+            }
+
+            fileHandler.setTable(new Table(fileHandler.readFile(PATH, regex), header));
         }
 
         catch(FileNotFoundException e) {
