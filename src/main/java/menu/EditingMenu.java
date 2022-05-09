@@ -1,7 +1,7 @@
-package menu;
+package main.java.menu;
 
-import main.FileHandler;
-import main.Table;
+import main.java.main.FileHandler;
+import main.java.main.Table;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,6 @@ public class EditingMenu implements Menuable {
     private static EditingMenu instance;
 
     private EditingMenu() {
-        ;
     }
 
     public static EditingMenu getInstance() {
@@ -33,14 +32,8 @@ public class EditingMenu implements Menuable {
         switch (this.input()) {
             case 1 -> edit(FileHandler.getInstance().getTable());
             case 2 -> {return;}
-            case -1 -> {
-                System.out.println("There's a problem with your input\n");
-                return;
-            }
-            default -> {
-                System.out.println("There's no such an option\n");
-                return;
-            }
+            case -1 -> System.out.println("There's a problem with your input\n");
+            default -> System.out.println("There's no such an option\n");
         }
     }
 
@@ -80,16 +73,13 @@ public class EditingMenu implements Menuable {
         }
         catch (IndexOutOfBoundsException e) {
             System.out.println("Index out of bounds!\n");
-            return;
         }
         catch (IOException e) {
             System.out.println("There was a problem with your input(IOException)\n");
-            return;
         }
 
         catch (NumberFormatException e) {
             System.out.println("NumberFormatException!\n");
-            return;
         }
     }
 

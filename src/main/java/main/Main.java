@@ -1,7 +1,7 @@
-package main;
+package main.java.main;
 
-import menu.MainMenu;
-import menu.MenuController;
+import main.java.menu.MainMenu;
+import main.java.menu.MenuController;
 
 /* TODO:
 1. close readers in filehandler DONE

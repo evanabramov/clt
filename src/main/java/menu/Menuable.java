@@ -1,4 +1,4 @@
-package menu;
+package main.java.menu;
 
 import java.io.BufferedReader;
 import java.io.IOException;

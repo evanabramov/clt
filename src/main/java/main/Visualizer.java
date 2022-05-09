@@ -1,4 +1,4 @@
-package main;
+package main.java.main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +10,7 @@ public class Visualizer {
 
     public static Visualizer instance;
 
-    private Visualizer() {
-        ;
-    }
+    private Visualizer() {}
 
     public static Visualizer getInstance() {
         if(instance == null)

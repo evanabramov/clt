@@ -1,7 +1,7 @@
-package menu;
+package main.java.menu;
 
-import main.FileHandler;
-import main.Visualizer;
+import main.java.main.FileHandler;
+import main.java.main.Visualizer;
 
 import java.io.File;
 
@@ -10,9 +10,7 @@ public class ViewingMenu implements Menuable {
 
     private static ViewingMenu instance;
 
-    private ViewingMenu() {
-        ;
-    }
+    private ViewingMenu() {}
 
     public static ViewingMenu getInstance() {
         if(instance == null)
@@ -34,14 +32,8 @@ public class ViewingMenu implements Menuable {
             case 1 -> visualizer.printTable(FileHandler.getInstance().getTable());
             case 2 -> visualizer.printCSV(FileHandler.getInstance().getTable());
             case 3 -> { return;}
-            case -1 -> {
-                System.out.println("There's a problem with your input\n");
-                return;
-            }
-            default -> {
-                System.out.println("There's no such an option\n");
-                return;
-            }
+            case -1 -> System.out.println("There's a problem with your input\n");
+            default -> System.out.println("There's no such an option\n");
         }
     }
 }

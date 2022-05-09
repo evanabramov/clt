@@ -1,13 +1,11 @@
-package menu;
-import main.*;
+package main.java.menu;
+import main.java.main.*;
 // main menu
 public class MainMenu implements Menuable {
 
     private static MainMenu instance;
 
-    private MainMenu() {
-        ;
-    }
+    private MainMenu() {}
 
     public static MainMenu getInstance() {
         if(instance == null)
@@ -49,14 +47,8 @@ public class MainMenu implements Menuable {
             }
             case 3 -> pass(FileHandlingMenu.getInstance());
             case 4 -> System.exit(0);
-            case -1 -> {
-                System.out.println("There's a problem with your input\n");
-                return;
-            }
-            default -> {
-                System.out.println("There's no such an option\n");
-                return;
-                }
+            case -1 -> System.out.println("There's a problem with your input\n");
+            default -> System.out.println("There's no such an option\n");
             }
         }
 

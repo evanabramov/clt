@@ -1,9 +1,7 @@
-package menu;
+package main.java.menu;
 
 public class MenuController {
-    private MenuController() {
-        ;
-    }
+    private MenuController() {}
 
     // main loop that calls menu
     public static void loop() {

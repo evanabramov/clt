@@ -1,4 +1,4 @@
-package main;
+package main.java.main;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,9 +10,7 @@ public class FileHandler {
     private Table table;
     private String PATH;
 
-    private FileHandler() {
-        ;
-    }
+    private FileHandler() {}
 
     public static FileHandler getInstance() {
         if(instance == null)
