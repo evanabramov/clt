@@ -15,7 +15,7 @@ public class MainMenu implements Menuable {
 
     @Override
     public void show() {
-        System.out.println("Simple csv files' viewer and editor.\nMade by Evan Abramov @evanabramov.");
+        System.out.println("Simple csv files' viewer and editor.");
         System.out.println("Filepath: " + FileHandler.getInstance().getPATH());
 
         System.out.println("1. Viewing");
