@@ -1,7 +1,9 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.MissingFormatArgumentException;
+import java.util.stream.IntStream;
 
 // visualization class.
 public class Visualizer {
@@ -43,6 +45,10 @@ public class Visualizer {
         System.out.println();
 
         String leftAlignFormat = leftAlignFormat(table);
+        /* since columnsWidth method gives us 1 less on each column than leftAlignFormat calculates,
+           we count bottomLineSum like this */
+        int[] widths = columnsWidth(table);
+        int bottomLineSum = IntStream.of(widths).sum() + 2 * widths.length - 1;
 
         int header = 0;
         if (table.getHeader() != null)
@@ -50,9 +56,10 @@ public class Visualizer {
 
         for (String[] row : table.getTable()) {
             try {
-                System.out.format(leftAlignFormat, row);
+                // varargs call, cast to object[] to make it obvious
+                System.out.format(leftAlignFormat, (Object[]) row);
                 if (header == 1) {
-                    System.out.println(bottomLine(row.toString().length()));
+                    System.out.println(bottomLine(bottomLineSum));
                     header = 0;
                 }
             } catch (MissingFormatArgumentException e) {
@@ -103,7 +110,7 @@ public class Visualizer {
                 leftAlignFormat += "s|%-";
         }
 
-        leftAlignFormat += "s |%n";
+        leftAlignFormat += "s|%n";
         return leftAlignFormat;
     }
 
