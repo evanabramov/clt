@@ -1,4 +1,3 @@
-
 <h2> In-terminal csv files' viewer and editor</h2>
 
 Small study project, so I can practice program designing and java core. 
