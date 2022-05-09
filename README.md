@@ -2,7 +2,7 @@
 
 Small study project, so I can practice program designing and java core. 
 
-<h2> How to build (for Linux) </h2>
+<h2> How to build (on Linux) </h2>
 
 Download the gradle branch, extract it and open the folder.
 
