@@ -6,7 +6,7 @@ import menu.MenuController;
 /* TODO:
 1. close readers in filehandler DONE
 2. comments DONE
-3. different regex or clean just read file
+3. different regex or clean just read file DONE
 4. solve bottomline issue
 5. setup gradle, make another branch probably
 */

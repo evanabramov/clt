@@ -44,6 +44,7 @@ public class FileHandler {
 
         try(reader) {
             while (reader.ready()) {
+
                 list.add(reader.readLine().split(thisRegex));
             }
         }

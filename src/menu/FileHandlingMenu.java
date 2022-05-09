@@ -36,20 +36,17 @@ public class FileHandlingMenu implements Menuable {
     @Override
     public void logic() {
         switch(input()) {
-            case 1:
-                load();
-                break;
-            case 2:
-                write();
-                break;
-            case 3:
-                return;
-            case -1:
+            case 1 -> load();
+            case 2 -> write();
+            case 3 -> {return;}
+            case -1 -> {
                 System.out.println("There's no such an option!\n");
                 return;
-            default:
+            }
+            default -> {
                 System.out.println("There's a problem with your input\n");
                 return;
+            }
         }
     }
 

@@ -23,7 +23,7 @@ public class ViewingMenu implements Menuable {
     @Override
     public void show() {
         System.out.println("1. View the table");
-        System.out.println("2. View the original file");
+        System.out.println("2. View as CSV");
         System.out.println("3. Back");
     }
 
@@ -31,20 +31,17 @@ public class ViewingMenu implements Menuable {
     public void logic() {
         Visualizer visualizer = Visualizer.getInstance();
         switch (this.input()) {
-            case 1:
-                visualizer.printTable(FileHandler.getInstance().getTable());
-                break;
-            case 2:
-                visualizer.printCSV(FileHandler.getInstance().getTable());
-                break;
-            case 3:
-                return;
-            case -1:
+            case 1 -> visualizer.printTable(FileHandler.getInstance().getTable());
+            case 2 -> visualizer.printCSV(FileHandler.getInstance().getTable());
+            case 3 -> { return;}
+            case -1 -> {
                 System.out.println("There's a problem with your input\n");
                 return;
-            default:
+            }
+            default -> {
                 System.out.println("There's no such an option\n");
                 return;
+            }
         }
     }
 }

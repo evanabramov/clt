@@ -31,17 +31,16 @@ public class EditingMenu implements Menuable {
     @Override
     public void logic() {
         switch (this.input()) {
-            case 1:
-                edit(FileHandler.getInstance().getTable());
-                break;
-            case 2:
-                return;
-            case -1:
+            case 1 -> edit(FileHandler.getInstance().getTable());
+            case 2 -> {return;}
+            case -1 -> {
                 System.out.println("There's a problem with your input\n");
                 return;
-            default:
+            }
+            default -> {
                 System.out.println("There's no such an option\n");
                 return;
+            }
         }
     }
 
